@@ -1,0 +1,31 @@
+
+
+# Create a SSH client
+client = paramiko.SSHClient()
+
+# Connect to the remote host
+client.connect(hostname='192.168.1.1', username='username', password='password')
+
+# Create a new session
+session = client.get_transport().open_session()
+
+# Set the terminal type
+session.set_terminal_type('xterm')
+
+# Start a shell
+session.invoke_shell()
+
+# Send a command
+session.send('ls\n')
+
+# Get the output of the command
+output = session.recv(1024)
+
+# Print the output
+print(output)
+
+# Close the session
+session.close()
+
+# Close the SSH client
+client.close()
